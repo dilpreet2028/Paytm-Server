@@ -10,4 +10,5 @@ urlpatterns=[
 	url(r"^confirm/$",views.AddUserView.as_view(),name="confirm user"),
 	url(r"^get_user/$",views.GetUserView.as_view(),name="get user"),
 	
+	url(r"^gcm/$",views.GCMView.as_view(),name="GCM"),
 ]

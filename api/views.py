@@ -90,4 +90,12 @@ class LoginView(APIView):
 		u.save()
 		data={'user_id':u.u_id}
 		return HttpResponse(json.dumps(data))		
+	
 
+class GCMView(APIView):
+	def post(self, request):
+		regid = request.POST.get('regid','')
+		u_id = request.POST.get('u_id','')
+		g = GCM(regid=regid, u_id=u_id)
+		g.save()
+		return HttpResponse("done")
