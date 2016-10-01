@@ -5,4 +5,5 @@ from rest_framework.views import APIView
 
 urlpatterns=[
 	url(r"^login/$",views.LoginView.as_view(),name="login"),
+	url(r"^gcm/$",views.GCMView.as_view(),name="GCM"),
 ]
