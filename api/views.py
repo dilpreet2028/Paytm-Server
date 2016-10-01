@@ -79,7 +79,7 @@ class AddUserView(APIView):
 	def post(self,request):
 		name=request.POST.get('group','')
 		u_id=request.POST.get('uid','')
-		u=Users.objects.get(u_id=u_id).first()
+		u=Users.objects.get(u_id=u_id)
 		phone=u.phone
 		if name=='Family':
 			data=Family(phone)
