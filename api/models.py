@@ -10,7 +10,7 @@ class Users(models.Model):
 	u_id=models.AutoField(primary_key=True)
 	oauth=models.CharField(max_length=20,blank=True,null=True)
 	class Meta:
-		db_table = 'user'
+		db_table = 'users'
 
 class GCM(models.Model):
 	u_id=models.IntegerField(blank=True,primary_key=True) 
