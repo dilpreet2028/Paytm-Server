@@ -5,4 +5,9 @@ from rest_framework.views import APIView
 
 urlpatterns=[
 	url(r"^login/$",views.LoginView.as_view(),name="login"),
+	url(r"^invite/$",views.InviteView.as_view(),name="invite"),
+	url(r"^list_user/$",views.ListUserView.as_view(),name="list user"),
+	url(r"^confirm/$",views.AddUserView.as_view(),name="confirm user"),
+	url(r"^get_user/$",views.GetUserView.as_view(),name="get user"),
+	
 ]
