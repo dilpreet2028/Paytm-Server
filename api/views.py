@@ -47,6 +47,26 @@ def gcmsend(name):
 
 	return result	
 
+class SendView(APIView):
+	def post(self,request):
+		giver=request.POST.get('giver','')
+		taker=request.POST.get('taker','')
+		amount=request.POST.get('amount','')	
+		u_giver=Users.objects.get(phone=giver)
+		ssotoken=u_giver.oauth
+
+		u_taker=Users.objects.get(phone=taker)
+		ssoId=u_taker.ownerid
+		url="https://trust-uat.paytm.in/wallet-web/sendMoney"
+		headers={}
+		headers['ssotoken'] = ssotoken
+		data={    "request": {        "payeePhoneNumber": taker,        "amount": amount,        "payeeEmailId" : "",        "payeeSsoId": ssoId,        "currencyCode" : "INR",        "isToVerify" : "0",        "isLimitApplicable" : "1",        "comment":"test"    },    "ipAddress": "127.0.0.1",    "platformName": "PayTM",    "operationType": "P2P_TRANSFER",    "channel" : "",    "version" : ""}
+		res=requests.post(url,data=json.dumps(data),headers=headers)
+		result=json.dumps(res.json())
+
+		return HttpResponse(json.loads(result)['response']['state'])		
+
+
 class InviteView(APIView):
 	def post(self,request):
 		u_id=request.POST.get('u_id')
@@ -121,3 +141,4 @@ class GCMView(APIView):
 		g = GCM(regid=regid, u_id=u_id)
 		g.save()
 		return HttpResponse("done")
+

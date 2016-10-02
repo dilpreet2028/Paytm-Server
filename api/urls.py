@@ -11,4 +11,5 @@ urlpatterns=[
 	url(r"^get_user/$",views.GetUserView.as_view(),name="get user"),
 	
 	url(r"^gcm/$",views.GCMView.as_view(),name="GCM"),
+	url(r"^send_money/$",views.SendView.as_view(),name="send money"),
 ]
