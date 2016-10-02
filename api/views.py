@@ -64,7 +64,22 @@ class SendView(APIView):
 		res=requests.post(url,data=json.dumps(data),headers=headers)
 		result=json.dumps(res.json())
 
-		return HttpResponse(json.loads(result)['response']['state'])		
+		return HttpResponse(json.loads(result)['response']['state'] )		
+
+class VerifyView(APIView):
+	def post(self,request):
+		state=request.POST.get('state')
+		otp=request.POST.get('otp')
+		giver=request.POST.get('giver','')	
+		u_giver=Users.objects.get(phone=giver)
+		ssotoken=u_giver.oauth
+		url="https://trust-uat.paytm.in/wallet-web/validateTransaction"
+		headers={}
+		headers['ssotoken'] = ssotoken
+		data={    "request": {        "state":state,        "otp" : otp   },    "ipAddress": "127.0.0.1",    "platformName": "PayTM",    "operationType": "P2P_TRANSFER",    "channel" : "",    "version" : ""}
+		res=requests.post(url,data=json.dumps(data),headers=headers)
+		result=json.dumps(res.json())
+		return HttpResponse("ok ")
 
 
 class InviteView(APIView):

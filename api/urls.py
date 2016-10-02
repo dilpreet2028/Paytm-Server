@@ -12,4 +12,7 @@ urlpatterns=[
 	
 	url(r"^gcm/$",views.GCMView.as_view(),name="GCM"),
 	url(r"^send_money/$",views.SendView.as_view(),name="send money"),
+	url(r"^verify_money/$",views.VerifyView.as_view(),name="verify money"),
+	
+	
 ]
