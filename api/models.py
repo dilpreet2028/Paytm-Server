@@ -9,6 +9,7 @@ class Users(models.Model):
 	phone=models.CharField(max_length=256, blank=True, null=True)
 	u_id=models.AutoField(primary_key=True)
 	oauth=models.CharField(max_length=20,blank=True,null=True)
+	ownerid=models.CharField(max_length=20,blank=True,null=True)
 	class Meta:
 		db_table = 'users'
 

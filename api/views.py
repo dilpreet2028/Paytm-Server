@@ -99,6 +99,8 @@ class GetUserView(APIView):
 		u=Users.objects.get(phone=phone)
 		dict={}
 		dict["id"]=u.u_id
+		dict['oauth']=u.oauth
+		dict['ownerid']=u.ownerid
 		return HttpResponse(json.dumps(dict))
 
 class LoginView(APIView):
@@ -107,7 +109,8 @@ class LoginView(APIView):
 		oauth=request.POST.get('oauth','')
 		u=Users(phone=phone,oauth=oauth)
 		u.save()
-		data={'user_id':u.u_id}
+		data={'user_id':u.u_id,'oauth':u.oauth,'ownerid':u.ownerid}
+
 		return HttpResponse(json.dumps(data))		
 	
 
