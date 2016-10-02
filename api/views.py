@@ -26,7 +26,7 @@ def send_invite(phone,name,table):
 				"data":{"msg":phone+" invited you to join "+table+" group","table":table,'invite':1,'sender':phone}
 			}
 		res=requests.post(url,data=json.dumps(data),headers=headers)
-		result=res.json()
+		result=json.dumps(res.json())
 	else:
 		result="Not found"	
 	print result	
@@ -82,13 +82,13 @@ class AddUserView(APIView):
 		u=Users.objects.get(u_id=u_id)
 		phone=u.phone
 		if name=='Family':
-			data=Family(phone)
+			data=Family(phone=phone)
 			data.save()
 		elif name=='Friend':
-			data=Friend(phone)	
+			data=Friend(phone=phone)	
 			data.save()
 		elif name=='Other':
-			data=Other(phone)
+			data=Other(phone=phone)
 			data.save()
 		return HttpResponse('done')		
 
